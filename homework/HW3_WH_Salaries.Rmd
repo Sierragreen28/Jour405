@@ -21,17 +21,27 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 
 You should examine that dataframe carefully by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the categories of incidents. From a reporting standpoint, what stands out to you about this data? Are there any salary values that will cause problems for analysis?
 
-ANSWER HERE
+ANSWER HERE (The data shows the names and titles of employees in the executive office of the president and how much they make annually. The only thing that stands out is that the salaries range from about 60,000 to nearly 200,000, so what makes up that difference and why are they paid differently. Also some people have a zero dollar earning but I wonder what that means)
 
 ### Task 4: Calculate the Mean and Median of the Salaries
 
 Write code to calculate the mean and median of the salaries in the dataset using the `summarize()` function. You don't need to make a new dataframe, just display the results.
 
-```{r}
+`Sumarize()``{r}
 
 ```
 
 ### Task 5: Add in the minimum and maximum salaries
+
+'min(0)'
+```{r}
+
+```
+
+'max(197,200)')
+```{r}
+
+```
 
 Take the code you just wrote and add in the minimum and maximum salaries (the functions for that are `min()` and `max()`). Your results should show four columns: mean_salary, median_salary, min_salary, max_salary.
 
@@ -43,10 +53,10 @@ Take the code you just wrote and add in the minimum and maximum salaries (the fu
 
 Write a couple of sentences describing the results of your analysis. What do the mean and median salaries tell you about the data? What do the minimum and maximum salaries tell you? Are there any outliers in the data?
 
-ANSWER HERE
+ANSWER HERE The outliers are the really low salaries reported like 0 dollars and the high salries of almost 200,000. 
 
 ### Task 7: Story Idea
 
 Based on the data, what is your best story idea? What is the next step you would take to develop that story idea?
 
-ANSWER HERE
+ANSWER HERE The story idea could be baised around the differences in the Mean and Median and why they exist, or also do more research to find out why the span in differences of salaries is so large and what the different employees offer to make their salaries so different. 

@@ -9,7 +9,7 @@ Get started by loading the tidyverse in a code block, then load the CSV file her
 ### Task 1: Load the tidyverse
 
 ```{r}
-library(tidyverse)
+#library(tidyverse)
 ```
 
 ### Task 2: Load the data
@@ -39,7 +39,7 @@ team_aces |> mutate(percentile = ntile(total_aces, 100))
 
 Write a couple of sentences that puts Maryland into context with the other teams in the dataset. You can do some Internet research to help with this.
 
-
+Maryland was in the 95 percentile in 2024, although they had a 14-17 overall record and went 5-15 in ben ten play. Although being ranked 17th overall puts them in a good position compared to other big ten schools in the nation. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 

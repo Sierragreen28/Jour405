@@ -22,14 +22,17 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 
 You should examine that dataframe carefully by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the categories of incidents. From a reporting standpoint, are any of the categories more important than others? Why or why not? Do any of them make the job of summarizing the data more difficult? Why or why not?
 
-ANSWER HERE
+ANSWER HERE The data shows that the two largest categories of crime are accidents and auto theft, so from a reporting standpoint that is something to be aware of. Another thing i noticed amoung the data was that the majority of categories had higher rates at the end of the tear. 
 
 ### Task 4: Calculating Averages
 
 Add up the total number of incidents per month for each category using `mutate()`, calling the new column `total_incidents`. Then calculate the average number of incidents per month for each category of crime using the total number of months, calling the new column `average_incidents`. Assign the result to a new dataframe called `pg_crime_averages`.
 
-```{r}
+`total_incidents``{r}
 
+Jan: 124
+
+Feb: 
 ```
 
 ### Task 5: Describe the Averages
@@ -50,13 +53,13 @@ One theory about crime is that it is more likely to occur in the summer months. 
 
 Look at the `summer_crime_averages` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change in the average number of incidents per month for each category of crime for the months of June, July, and August. Do you see any patterns? What does this tell you about the theory that crime is more likely to occur in the summer months?
 
-ANSWER HERE
+ANSWER HERE 
 
 ### Task 8: What's the Story?
 
 Write up a lede and nutgraf of a story focused on the crime data in Prince George's County. It could be from any of the dataframes you've created in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+ANSWER HERE 
 
 ### Task 9: Save Your Work and Put it on GitHub
 
