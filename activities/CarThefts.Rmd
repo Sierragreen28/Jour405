@@ -48,6 +48,7 @@ car_thefts |>
 
 Is the distribution normal or skewed in one direction? Write a sentence in which you describe the range of the data covered by one standard deviation from the mean on both sides - how much of the data falls in that range?
 
+The distribution is pretty normal but slightly skewed to the right, because the values on that side are larger. The standard deviation is almost 4.3 with a mean at 12.7. Just looking at the image it looks like about 2/3 of the data is in between the blue lines and the standard deviation. 
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
