@@ -7,11 +7,13 @@ In this assignment, you will be working with a dataset of songs played on Spotif
 ### Task 1: Load the tidyverse
 
 ```{r}
+library(tidyverse)
 ```
 
 ### Task 2: Load the Spotify Songs dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/spotify_2020.csv
 
 ```{r}
+spotify <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/spotify_2020.csv")
 ```
 
 ### Task 3: Calculate the mean and standard deviation of the danceability scores
@@ -19,6 +21,10 @@ In this assignment, you will be working with a dataset of songs played on Spotif
 Write code to calculate the mean standard deviation of the danceability scores in the Spotify dataset. Display those.
 
 ```{r}
+mean_danceability <- mean(spotify$danceability)
+sd_danceability <- sd(spotify$danceability)
+
+Mean danceability is 0.67 and Standard deviation danceability is 0.16
 ```
 
 ### Task 4: Create a histogram of the danceability scores
@@ -26,6 +32,13 @@ Write code to calculate the mean standard deviation of the danceability scores i
 Write code to create a histogram of the danceability scores in the Spotify dataset, based on the example we did in class.
 
 ```{r}
+library(ggplot2)
+
+ggplot(spotify, aes(x = danceability)) +
+  geom_histogram() +
+  labs(title = "Distribution of Danceability Scores",
+       x = "Danceability",
+       y = "Frequency")
 ```
 
 ### Task 5: Add a line to the histogram for the mean danceability score
@@ -33,11 +46,21 @@ Write code to create a histogram of the danceability scores in the Spotify datas
 Write code to add a vertical line to the histogram for the mean danceability score, based on the example in class.
 
 ```{r}
+hist(spotify$danceability,
+     main = "Distribution of Danceability Scores",
+     xlab = "Danceability",
+     ylab = "Frequency")
+
+abline(v = mean(spotify$danceability),
+       col = "red",
+       lwd = 2)
 ```
 
 ### Task 6: Describe our results
 
 Write a few sentences about the distribution of danceability scores in the Spotify dataset. Is it a normal distribution, or is it skewed in one direction? What does the mean and distribution tell us about the songs in the dataset?
+
+The data set for danceability scores for songs in spotify is a normal distribution, but it is more skewed to the left. This means that the majority of songs have middle to high danceability ratings. 
 
 ### Task 7: Save Your Work and Put it on GitHub
 
