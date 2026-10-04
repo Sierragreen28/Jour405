@@ -32,7 +32,7 @@ library(lubridate)  # For working with dates
 Load the accident data from our CSV file at https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv into a dataframe called `accidents`:
 
 ```{r load-data}
-
+accidents <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv")
 ```
 
 ## Data Exploration
@@ -40,18 +40,25 @@ Load the accident data from our CSV file at https://raw.githubusercontent.com/dw
 Let's first understand our dataset structure:
 
 ```{r data-exploration}
-# Get a summary of the data
+## Get a summary of the data
 summary(accidents)
 
-# Check how many days we have in total
+## Check how many days we have in total
 nrow(accidents)
 
-# Check the date range
+## Check the date range
 min(accidents$date)
 max(accidents$date)
 ```
 
 Now let's create a time series visualization of accidents:
+
+```{r}
+install.packages("ggplot2")
+```
+```{r}
+library(ggplot2)
+```
 
 ```{r time-series-plot}
 # Plot time series
@@ -68,9 +75,16 @@ ggplot(accidents, aes(x = date, y = total)) +
 ### Task 2 (3 points)
 Looking at the time series visualization above, identify at least two noticeable patterns or anomalies. What questions would you want to investigate further based on this initial view of the data? How might these visual patterns translate into potential story angles?
 
-ANSWER HERE
+It is hard to really gather patterns because it is day to day so everything fluctuates. I would want to know if certian patterns or drops have anything to do with outside factors like weather or time of day. 
 
 The daily data is quite noisy, so let's also look at weekly patterns:
+```{r}
+library(tidyverse)
+library(knitr)
+```
+```{r}
+accidents$date <- as.Date(accidents$date)
+```
 
 ```{r weekly-patterns}
 # Add day of week 
@@ -107,21 +121,35 @@ ggplot(accidents, aes(x = day_of_week, y = total)) +
 ### Task 3 (2 points)
 Based on the day-of-week analysis, which day(s) have the highest and lowest average accidents? Why might these patterns exist?
 
-ANSWER HERE
+It looks like the highest day of the week is Friday and the weekend just after that, the lowest days are during the week. That might have to do with people drinking on the weekend and getting into accidents. 
 
 ## Calculating Z-Scores
 
 ### Task 4 (2 points)
 
 Now, using the accidents dataframe, add three columns using `mutate()`: mean_accidents, sd_accidents and z_score, based on the example from class.
+```{r}
+accidents <- accidents |>
+  mutate(
+    mean_accidents = mean(total),
+    sd_accidents = sd(total),
+    z_score = (total - mean_accidents) / sd_accidents
+  )
+
+# Display the data with z-scores
+accidents |>
+  select(date, day_of_week, total, z_score) |>
+  head(10) |>
+  kable(digits = 2)
+```
 
 ```{r calculate-z-scores}
 # Calculate z-scores for total accidents
 accidents <- accidents |>
   mutate(
-    mean_accidents = REPLACE_ME,
-    sd_accidents = REPLACE_ME,
-    z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    mean_accidents = mean(total),
+    sd_accidents = sd(total),
+    z_score = (total - mean_accidents) / sd_accidents
   )
 
 # Display the data with z-scores
@@ -156,7 +184,7 @@ unusual_days |>
 ### Task 5 (3 points)
 Choose one of the top 10 unusual days and research what might have happened on that date. Look for weather events, holidays, major incidents, or other factors that could explain the unusual number of accidents. Briefly describe your findings and how you would incorporate this context into a story.
 
-ANSWER HERE
+I researched the day in 2025 because it was the most recent. I didn't find much about crazy weather or anything unusual happening but it did say that the Cherry Blossoms were in their peak so that might of drove a lot of people into the city and caused accidents. I would just briefly explain how local events have an inpact on traffic. 
 
 Let's visualize these unusual days:
 
@@ -186,9 +214,9 @@ Let's calculate z-scores that account for day of week patterns based on the same
 accidents <- accidents |>
   group_by(day_of_week) |>
   mutate(
-    dow_mean = REPLACE_ME,
-    dow_sd = REPLACE_ME,
-    dow_z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    dow_mean = mean(total),
+    dow_sd = sd(total),
+    dow_z_score = (total - dow_mean) / dow_sd
   ) |>
   ungroup()
 
@@ -207,7 +235,7 @@ unusual_dow |>
 ### Task 7 (3 points)
 Compare the days that have extreme z-scores overall versus those with extreme day-of-week z-scores. How do these lists differ? What journalistic insights can you draw from comparing these two different approaches to measuring "unusual" days?
 
-ANSWER HERE
+The days of the week total are easier to digest for a reader because they simply tell the numbers of accidents that happened. The z score explains how far it is away from the mean which is also a good representation of how unusual the numbers are, they are just tow different ways to measure the data. 
 
 Let's see how many unusual days we have for each day of the week:
 
@@ -286,7 +314,7 @@ unusual_monthly |>
 ### Task 8 (2 points)
 Based on the monthly pattern analysis, which months have the highest and lowest average accidents? Develop a hypothesis about why these seasonal patterns exist.
 
-ANSWER HERE
+The monthly pattern shows that the highest average for accidents happens in October and the lowest in January. It could have something to do with weather but then I feel like summer would be higher. I know a lot of accidents happen on halloween so maybe it's representative of that. 
 
 ## Identifying Extreme Outliers
 
@@ -311,9 +339,11 @@ if(nrow(extreme_outliers) > 0) {
 ### Task 9 (2 points)
 For the extreme outliers identified (z-scores beyond ±3), what do they have in common?
 
-ANSWER HERE
+The majority are around 3 and a half and all of the days were weekend days except for one. 
 
 ## Your Best Story Pitch
 
 ### Task 10 (5 points)
 Based on all the analyses performed, craft your best story pitch, including a headline and lede. Be sure to include what kinds of sources/people you'd talk to for the story.
+
+I would write a story about why weekends are more likely to see accidents than during the week, even though people commute to work every day during the week. I would need to talk to police and maybe even eye witnesses to build an entire story and see if it has to do with any other outside factors. 
