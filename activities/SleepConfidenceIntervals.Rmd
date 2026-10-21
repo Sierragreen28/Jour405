@@ -41,7 +41,7 @@ sleep_stats
 
 **Answer this question:** Based on these numbers alone, what would you tell the health reporter? Why might it be risky to report the average as the definitive answer for all students?
 
-ANSWER HERE
+ANSWER HERE: I would tell a health reporter that the average mean hours of sleep amung college students at the university is 7.7 hors. It is risky to report this average because it may not be representative of all of the students at the school because people may be below or above this 
 
 ### Task 3: Calculate the standard error
 
@@ -58,7 +58,7 @@ sleep_stats
 
 **Answer this question:** The standard error is much smaller than the standard deviation. Why? What does each one measure?
 
-ANSWER HERE
+ANSWER HERE: The standard error is smaller than the standard deviation because it is how much we would expect the mean to vary if we repeaditly tested the mean and the deviation is based on the data. The mean has less room to change and shoudl stay relativly the same if the mean is the same between sets. 
 
 ### Task 4: Calculate a 95% confidence interval
 
@@ -79,7 +79,7 @@ sleep_stats |>
 
 **Answer this question:** Write one sentence explaining what this confidence interval means in plain English that a reader would understand.
 
-ANSWER HERE
+ANSWER HERE: Maryland students are well rested. 
 
 ### Task 5: Visualize the distribution with the confidence interval
 
@@ -112,7 +112,7 @@ ggplot(sleep_data, aes(x = hours)) +
 
 **Answer this question:** Look at the chart. Notice that the confidence interval is much narrower than the spread of individual data points. Why? What's the difference between the variation in individual sleep hours and the uncertainty about the average?
 
-ANSWER HERE
+ANSWER HERE: 
 
 ### Task 6: The CDC question — is 7 hours within the interval?
 
@@ -134,7 +134,7 @@ sleep_stats |>
   b) "Students May Not Be Getting Enough Sleep, Survey Suggests"
   c) "Survey: Students Getting Recommended Amount of Sleep"
 
-ANSWER HERE
+ANSWER HERE: The best headline is that "Survey: Students Getting Recommended Amount of Sleep" because that is what the survey suggests. The average is also seven hours but that is not always representative of all the students and can be explained in more simple words for a header. 
 
 ### Task 7: What about a bigger sample?
 
