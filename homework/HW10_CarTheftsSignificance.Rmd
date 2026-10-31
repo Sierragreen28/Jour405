@@ -1,6 +1,6 @@
 ---
 title: "HW10: Significance Testing & Effect Size"
-name: REPLACE WITH YOUR NAME
+name: Sierra Green 
 ---
 
 You previously calculated the mean, margin of error and confidence interval for monthly car thefts in Prince George's County. Your editor now wants to know: it _looks_ like car thefts are decreasing lately, but is that change real, and how big is it? In this assignment, you'll use significance testing and effect size to answer those questions. Load the tidyverse and the data to get started.
@@ -10,6 +10,9 @@ You previously calculated the mean, margin of error and confidence interval for 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # LOAD THE TIDYVERSE
+```
+```{r}
+library (tidyverse)
 ```
 
 ```{r}
@@ -46,7 +49,7 @@ t_test_periods
 
 **Answer this question:** What is the p-value? Is it less than 0.05? Can we reject the null hypothesis? What does this tell your editor?
 
-PUT ANSWERS HERE
+The p-value is 2.14e-05 which is significantly smaller than 0.05 which means we can reject the null hypothesis and tell the editor that there is some change and a possible story from the data we collected. 
 
 ### Task 3: Visualize the comparison (4 points)
 
@@ -57,11 +60,11 @@ Let's see the two periods side by side with their confidence intervals. Replace 
 period_summary <- car_thefts |>
   group_by(period) |>
   summarize(
-    mean_thefts = mean(REPLACE_ME),
-    sd_thefts = sd(total),
+    mean_thefts = mean(thefts),
+    sd_thefts = sd(thefts),
     months = n(),
     se_thefts = sd_thefts / sqrt(months),
-    margin_error = qt(0.975, df = REPLACE_ME - 1) * se_thefts,
+    margin_error = qt(0.975, df = months - 1) * se_thefts,
     ci_lower = mean_thefts - margin_error,
     ci_upper = mean_thefts + margin_error
   )
@@ -85,7 +88,7 @@ ggplot(aes(x = period, y = mean_thefts, fill = period)) +
 
 **Answer this question:** Look at the error bars (confidence intervals) on the chart. Do they overlap? What does that tell you about whether the difference between the two periods is real?
 
-PUT ANSWERS HERE
+Yes the confidence intervals overlap between 85 and 101, which means the difference has some satistical difference and enought to rule out no change. 
 
 ### Task 4: Calculate the effect size (5 points)
 
@@ -99,18 +102,18 @@ Replace the REPLACE_ME values. You'll need to pull the values from `period_summa
 
 ```{r}
 # Extract the values from period_summary
-first_half_stats <- period_summary |> filter(period == "First Half")
-second_half_stats <- period_summary |> filter(period == "Second Half")
+first_half_stats <- t_test_periods |> filter(period == "First Half")
+second_half_stats <- t_test_periods |> filter(period == "Second Half")
 
 # Calculate pooled standard deviation
 pooled_sd <- sqrt(
   ((first_half_stats$months - 1) * first_half_stats$sd_thefts^2 +
    (second_half_stats$months - 1) * second_half_stats$sd_thefts^2) /
-  (first_half_stats$months + second_half_stats$months - REPLACE_ME)
+  (first_half_stats$months + second_half_stats$months - 2)
 )
 
 # Calculate Cohen's d
-cohens_d <- (first_half_stats$mean_thefts - REPLACE_ME) / pooled_sd
+cohens_d <- (first_half_stats$mean_thefts - second_half_stats$mean_thefts) / pooled_sd
 
 # Interpret it
 effect_label <- case_when(
@@ -131,7 +134,7 @@ tibble(
 
 **Answer this question:** How would you describe this effect size? Compare it to the effect sizes we calculated in class (the response times activity had a small effect, the housing prices activity had a medium effect). What does a large effect size mean for the story you'd write about car thefts?
 
-PUT ANSWERS HERE
+A large effect size when it comes to car thefts would mean that it is a larger issue and there is more data to look at. Compared to the activities we did in class, this data has a more substancial result. 
 
 ### Task 5: Putting it all together (7 points)
 
@@ -139,10 +142,12 @@ You now have three pieces of evidence: the confidence intervals from last week, 
 
 1. In Part 1, your editor asked "just tell me if car thefts are going up or down". Now you have significance testing. Write 2-3 sentences telling your editor the answer, using all three pieces of evidence (CI, p-value, and effect size).
 
-PUT ANSWERS HERE
+Through the statistical tests we did, we found that car thefts went down. The p-value was significantly smaller than 0.05, meaning that the result defys the null hypothesis which is no change. The effect size and confidence intervals also lead us to believe that the results are substancial. 
 
 2. Write a headline and a 2-3 sentence lede for a story about car thefts in Prince George's County. Unlike the response times story from class (where the effect was small and the headline needed to be cautious), this is a case where the data strongly supports a clear conclusion. Your writing should reflect that — but still note the limitations (correlation vs. causation, what else might explain the decline).
 
-PUT ANSWERS HERE
+Car thefts in Prince George's are down by a lot in recent months. 
+
+Prince George's County is know for having large amounts of car thefts each month, but recent data shows that there is a downfall. In the end of 2025 and begging of 2026, there has been a lot less reported car thefts than usual. 
 
 When you are finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
