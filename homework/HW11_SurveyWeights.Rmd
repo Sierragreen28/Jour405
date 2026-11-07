@@ -46,19 +46,19 @@ ggplot(nonvoters_data, aes(x = weight)) +
 
 **Question 1:** Most weights cluster near 1.0, but some are much higher or lower. What does a weight of 0.2 tell you about that respondent's group in the sample? What about a weight of 3.5? Why might a pollster assign such extreme weights?
 
-ANSWER HERE
+Most of the data is around 1.0. A wight of 0.2 says that the respondant's group is over represented, and a weight of 3.5 means that the group is very underrepresented. The pollster assigns that much weight to make the data more accurate for the study and equally represent all parties. 
 
 ## Task 2: Education Distribution in the Sample (3 points)
 
 ```{r education-distribution}
 nonvoters_data |>
-  count(REPLACE_ME) |>
+  count(3.5) |>
   mutate(percentage = round(n / sum(n) * 100, 1))
 ```
 
 **Question 2:** College graduates are overrepresented in most surveys. Does that appear to be true here? Why might college graduates be more likely to respond to a survey than people with less education?
 
-ANSWER HERE
+College graduates are more likely to respond maybe because the survey's get passed around by universities, and on college campuses there is a larger empasis put on voting. Also people with more education usually are more likely to vote. It appear to be evenly represented in this data. 
 
 ## Task 3: Unweighted Voting Intentions by Education (4 points)
 
@@ -87,7 +87,7 @@ unweighted_summary
 
 **Question 3:** Based only on these unweighted numbers, write a one-sentence headline for a story about education and voting intentions.
 
-ANSWER HERE
+People who have higer levels of education tend to vote more frequently. 
 
 ## Task 4: Weighted Voting Intentions by Education (2 points)
 
@@ -97,9 +97,12 @@ Now apply the weights. Instead of counting respondents, we sum their weights —
 weighted_by_education <- nonvoters_data |>
   filter(!is.na(Q21), Q21 > 0, !is.na(educ)) |>
   group_by(educ, Q21) |>
-  summarize(weighted_count = sum(REPLACE_ME), .groups = "drop_last") |>
-  mutate(weighted_total = sum(weighted_count),
-         weighted_percentage = weighted_count / weighted_total * 100) |>
+  summarize(weighted_count = sum(weight), .groups = "drop") |>
+  group_by(educ) |>
+  mutate(
+    weighted_total = sum(weighted_count),
+    weighted_percentage = weighted_count / weighted_total * 100
+  ) |>
   ungroup()
 
 weighted_summary <- weighted_by_education |>
@@ -109,7 +112,11 @@ weighted_summary <- weighted_by_education |>
     values_from = weighted_percentage,
     names_prefix = "pct_"
   ) |>
-  rename("Yes (%)" = pct_1, "No (%)" = pct_2, "Unsure (%)" = pct_3)
+  rename(
+    "Yes (%)" = pct_1,
+    "No (%)" = pct_2,
+    "Unsure (%)" = pct_3
+  )
 
 weighted_summary
 ```
@@ -125,7 +132,7 @@ viz_data <- bind_rows(
   weighted_by_education |>
     filter(Q21 == 1) |>
     mutate(Type = "Weighted",
-           percentage = REPLACE_ME) |>
+           percentage = weighted_percentage) |>
     select(Type, educ, percentage)
 )
 
@@ -145,7 +152,7 @@ ggplot(viz_data, aes(x = educ, y = percentage, fill = Type)) +
 
 **Question 4:** Which education group shows the biggest shift between weighted and unweighted results? In percentage points, how large is that shift? Does weighting change the story, or does it just change the exact numbers?
 
-ANSWER HERE
+The biggest shift is between highschool or less level of education. The shift is an almost 3% difference. It just changes the numbers because the weight difference is not super important to the story. 
 
 ## Task 6: The UMD Belonging Survey (8 points)
 
@@ -153,4 +160,8 @@ Earlier in class this week, we looked at the 2024 UMD Belonging and Community Su
 
 **Question 5:** Based on what you've learned in this assignment, write 2-3 paragraphs as if you were a reporter evaluating the UMD survey before writing a story based on it. Address: (1) what the lack of weighting means for how you'd use the results, (2) which groups in the UMD survey appeared most underrepresented based on Figures 1 and 2, and (3) what question you would ask the survey's authors before publishing.
 
-ANSWER HERE
+When looking at a survey it is important to make sure that everyone is represented. That means that the survey reaches everyone that needs to fill it out and they actually respond to get accurate data. Often times this isn't the case. 
+
+If you have a survey that over or under respresents a certian population, then weighting participants might be necessary. In a survey about belonging at the University of Maryland, the survey only got respones from a small portion of the student body, compared to faculty and staff. The data also severely under represented people of color. 
+
+When looking at data like this, it is important to understand how certian populations are represented and if it's accurate. Survey questions and categories are also extremely important. The fact that b oth of those categories were vauge in the UMD survey, makes it harder to understand the data. 
