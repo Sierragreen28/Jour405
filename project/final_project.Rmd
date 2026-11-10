@@ -1,0 +1,20 @@
+```{r}
+library(tidyverse)
+```
+```{r}
+BigTen_selectivity <- read_csv (https://badgerswire.usatoday.com/story/sports/college/badgers/2026/07/18/2026-27-big-ten-acceptance-rate/90896739007/)
+
+```
+This has data from 2026 on the admission selectivity of Big Ten compared to one another. Amoungst the 18 schools, outside of Northwestern which is private, the most selective school is UCLA with a 9% aceptance rate. Maryland is around the middle of the pack, tied with the University of Wisconsin Madison at 8th with a 45% aceptence rate. 
+
+
+```{r}
+Common_data <- read_csv (CDS_2025-2026)
+```
+
+The common data set from 2025-26 academic calender which is UMD specific and has years on data from before. It also shows the number of first year students admitted each year, and compares it to the number of transfer students as well. For example 33095 male students applies and 14151 got in, while 34006 women applied and 16067 got in. So the data is also broken down into different categories like gender and race to farther understand the data. 
+
+```{r}
+IPEDS_data <- read_csv (https://nces.ed.gov/ipeds/)
+```
+IPEDS allows you to  see statistical tables and data trends from a variety of Universities, and compare whatever statistics. 
