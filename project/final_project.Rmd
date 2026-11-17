@@ -1,3 +1,20 @@
+FINAL PROJECT TESTS I CAN RUN: 
+
+looking back at previous homework I think if i wanted to compare selectivity rates between different years at the same school doing a rate and percentage change tests similar to the Maryland City Crime data would work. When comparing various schools to one another Spotifty songs danceability assignment could be helpful. Similarly to danceability, selectivity would have certain criteria programmed into the code that would give me a selectivity score. I would also be able to use a distribution chart to see visually see the difference between schools. 
+
+I also asked ChatGPT to see if they had any other ideas of good tests that could be run. 
+
+me: "What would be the best type of tests to run if you want to find the selectivity of Universities admissions compared to one another in Rstudio?" 
+
+Response: "If your goal is to determine whether some universities are more selective in admissions than others, I would recommend using a combination of descriptive statistics, ANOVA, and post-hoc comparisons in RStudio.
+The best statistical test depends on what you want to prove, but ANOVA would be a good starting point if you're comparing several universities." 
+
+Basically another alternative would be ANOVA, which would help compare selectivity amungst universities and amungst multiple years. This is the code they suggested I use: 
+
+anova_model <- aov(Acceptance_Rate ~ University, data = admissions)
+
+summary(anova_model)
+
 ```{r}
 library(tidyverse)
 ```
