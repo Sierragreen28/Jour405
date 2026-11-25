@@ -35,3 +35,24 @@ The common data set from 2025-26 academic calender which is UMD specific and has
 IPEDS_data <- read_csv (https://nces.ed.gov/ipeds/)
 ```
 IPEDS allows you to  see statistical tables and data trends from a variety of Universities, and compare whatever statistics. 
+
+Tests to run: 
+```{r}
+BigTen_selectivity <- read_csv (Book(Universities_acceptance))
+```
+* I have the CSV file downloaded but it won't let me download it into Rstudio, it says it's on read only 
+
+```{r}
+mean(data$Acceptance_Rate)
+median(data$Acceptance_Rate)
+sd(data$Acceptance_Rate)
+summary(data$Acceptance_Rate)
+```
+These are other useful tests to get an idea of big ten schools in general. From there I can make a histogram or chart to see the data 
+```{r}
+anova_model <- aov(Acceptance_Rate ~ University, data = admissions)
+
+summary(anova_model)
+```
+This would be used to compare schools selectivity 
+I also need to find the data on Maryland's acceptance rates from over the years, to see if it has increased or decreased because the data I found in from 2024 
